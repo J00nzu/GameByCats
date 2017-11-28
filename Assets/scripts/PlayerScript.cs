@@ -13,7 +13,7 @@ public class PlayerScript : NetworkBehaviour {
 	}
 
 	public override void OnStartLocalPlayer () {
-		GetComponent<Renderer>().material.color = Color.green;
+        GetComponent<SpriteRenderer>().color = Color.green;
 		var nd = FindObjectOfType<NetDog>();
 		nd.SetLocalPlayer(this);
 		nd.AddPlayer(this);
@@ -24,17 +24,17 @@ public class PlayerScript : NetworkBehaviour {
 		
 	}
 
-	public void BaseAttack (Vector3 position, Vector3 direction) {
+	public void BaseAttack (Vector2 position, Vector2 direction) {
 		// Create the Bullet from the Bullet Prefab
 		var bullet = (GameObject)Instantiate(
 			bulletPrefab,
 			position + direction*2, 
 			Quaternion.identity);
 
-		bullet.transform.forward = direction;
+		bullet.transform.right = direction;
 
 		// Add velocity to the bullet
-		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 16;
+		bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * 16;
 
 		// Destroy the bullet after 2 seconds
 		Destroy(bullet, 2.0f);

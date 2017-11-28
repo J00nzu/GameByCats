@@ -17,8 +17,8 @@ public class CamScript : MonoBehaviour {
 		if(target != null){
 			this.transform.position = new Vector3(
 					target.transform.position.x,
-					transform.position.y,
-					target.transform.position.z
+					target.transform.position.y,
+					transform.position.z
 				);
 		}
 	}

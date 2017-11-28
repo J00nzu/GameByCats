@@ -7,14 +7,14 @@ using UnityEngine.Networking;
 
 public class ControlScript : NetworkBehaviour {
 
-	Rigidbody rb;
+	Rigidbody2D rb;
 	PlayerScript player;
 
 	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody2D>();
 		if (rb == null) {
-			rb = gameObject.AddComponent<Rigidbody>();
+			rb = gameObject.AddComponent<Rigidbody2D>();
 		}
 		player = GetComponent<PlayerScript>();
 	}
@@ -25,21 +25,14 @@ public class ControlScript : NetworkBehaviour {
 			return;
 		}
 
-		Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+		Vector2 moveDir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
 		rb.velocity = moveDir*5;
 
-		var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-		RaycastHit hit;
-
-		if (Physics.Raycast(mouseRay, out hit, 999)) {
-			Vector3 hitpoint = hit.point;
-			hitpoint.y = transform.position.y;
-			transform.LookAt(hitpoint, Vector3.up);
-		}
+        Vector2 mouseScreenPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.right = mouseScreenPosition - (Vector2) transform.position;        
 
 		if (Input.GetMouseButtonDown(0)) {
-			player.BaseAttack(transform.position, transform.forward);
+			player.BaseAttack(transform.position, transform.right);
 		}
 
 	}
