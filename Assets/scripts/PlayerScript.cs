@@ -6,13 +6,17 @@ using UnityEngine.Networking;
 public class PlayerScript : NetworkBehaviour {
 
 	public GameObject bulletPrefab;
+    public string playerName;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        playerName = "player_" + GetComponent<NetworkIdentity>().netId;
+        transform.name = playerName;
+    }
 
-	public override void OnStartLocalPlayer () {
+
+
+    public override void OnStartLocalPlayer () {
         GetComponent<SpriteRenderer>().color = Color.green;
 		var nd = FindObjectOfType<NetDog>();
 		nd.SetLocalPlayer(this);
@@ -24,11 +28,12 @@ public class PlayerScript : NetworkBehaviour {
 		
 	}
 
-	public void BaseAttack (Vector2 position, Vector2 direction) {
+    [Command]
+	public void Cmd_BaseAttack (Vector2 position, Vector2 direction) {
 		// Create the Bullet from the Bullet Prefab
 		var bullet = (GameObject)Instantiate(
 			bulletPrefab,
-			position + direction*2, 
+			position + direction*1, 
 			Quaternion.identity);
 
 		bullet.transform.right = direction;
@@ -36,7 +41,9 @@ public class PlayerScript : NetworkBehaviour {
 		// Add velocity to the bullet
 		bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * 16;
 
-		// Destroy the bullet after 2 seconds
-		Destroy(bullet, 2.0f);
+        BulletScript bscript = bullet.GetComponent<BulletScript>();
+        bscript.player = playerName;
+        NetworkServer.Spawn(bullet);
+        // Destroy the bullet after 2 seconds
 	}
 }

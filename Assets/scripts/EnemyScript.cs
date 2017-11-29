@@ -4,20 +4,17 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
-[RequireComponent(typeof(NavMeshAgent))]
 
 public class EnemyScript : NetworkBehaviour {
 
 	NetDog netDog;
-	NavMeshAgent nav;
-
+    Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
 		netDog = FindObjectOfType<NetDog>();
-		nav = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody2D>();
 		if (Network.isClient) {
-			nav.enabled = false;
 		}
 	}
 	
@@ -41,7 +38,7 @@ public class EnemyScript : NetworkBehaviour {
 		}
 
 		if (closestP != null) {
-			nav.SetDestination(closestP.transform.position);
+            rb.velocity = closestP.transform.position - transform.position;
 		}
 	}
 

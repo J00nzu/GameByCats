@@ -32,7 +32,7 @@ public class ControlScript : NetworkBehaviour {
         transform.right = mouseScreenPosition - (Vector2) transform.position;        
 
 		if (Input.GetMouseButtonDown(0)) {
-			player.BaseAttack(transform.position, transform.right);
+			player.Cmd_BaseAttack(transform.position, transform.right);
 		}
 
 	}
