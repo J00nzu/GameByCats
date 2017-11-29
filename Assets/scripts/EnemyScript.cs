@@ -10,6 +10,9 @@ public class EnemyScript : NetworkBehaviour {
 	NetDog netDog;
     Rigidbody2D rb;
 
+    float moveSpeed = 5;
+    float acceleration = 10; 
+
 	// Use this for initialization
 	void Start () {
 		netDog = FindObjectOfType<NetDog>();
@@ -26,21 +29,29 @@ public class EnemyScript : NetworkBehaviour {
 		LocalUpdate();
 	}
 
-	void LocalUpdate () {
-		float closestD = 100;
-		PlayerScript closestP = null;
+    void LocalUpdate()
+    {
+        float closestD = 100;
+        PlayerScript closestP = null;
 
-		foreach (PlayerScript ps in netDog.players) {
-			float d = (ps.transform.position - transform.position).magnitude;
-			if (d < closestD) {
-				closestP = ps;
-			}
-		}
+        foreach (PlayerScript ps in netDog.players)
+        {
+            float d = (ps.transform.position - transform.position).magnitude;
+            if (d < closestD)
+            {
+                closestP = ps;
+            }
+        }
 
-		if (closestP != null) {
-            rb.velocity = closestP.transform.position - transform.position;
-		}
-	}
+        if (closestP != null)
+        {
+            Vector3 targetVel = (closestP.transform.position - transform.position).normalized * moveSpeed;
+
+            rb.velocity = Vector3.Lerp(rb.velocity, targetVel, acceleration * Time.deltaTime);
+
+            transform.right = closestP.transform.position - transform.position;
+        }
+    }
 
 	void ServerUpdate () {
 
