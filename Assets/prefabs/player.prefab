@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114782003299334860}
   - component: {fileID: 50734402704139190}
   - component: {fileID: 58259599826989022}
+  - component: {fileID: 114985270085669244}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199885814387116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.007094, y: -2.7123785, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -147,6 +148,19 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 10
   m_InterpolateMovement: 1
+--- !u!114 &114985270085669244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1199885814387116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f56a2330517c54bb9d6da487361b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawBPrefab: {fileID: 1917126341114960, guid: 70ce20bfdd2d2524f9c00388f7a0b048,
+    type: 2}
 --- !u!212 &212572873578702488
 SpriteRenderer:
   m_ObjectHideFlags: 1

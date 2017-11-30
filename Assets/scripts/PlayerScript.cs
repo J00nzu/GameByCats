@@ -29,7 +29,7 @@ public class PlayerScript : NetworkBehaviour {
 	}
 
     [Command]
-	public void Cmd_BaseAttack (Vector2 position, Vector2 direction) {
+	public void Cmd_BaseAttack (Vector2 position, Vector2 direction, float damageMultiplier, float speedMultiplier, bool piercing) {
 		// Create the Bullet from the Bullet Prefab
 		var bullet = (GameObject)Instantiate(
 			bulletPrefab,
@@ -39,10 +39,14 @@ public class PlayerScript : NetworkBehaviour {
 		bullet.transform.right = direction;
 
 		// Add velocity to the bullet
-		bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * 16;
+		bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * 16 * speedMultiplier;
 
         BulletScript bscript = bullet.GetComponent<BulletScript>();
         bscript.player = playerName;
+        bscript.damage *= damageMultiplier;
+        if (piercing) {
+            bscript.SetPiercing(piercing);
+        }
         NetworkServer.Spawn(bullet);
         // Destroy the bullet after 2 seconds
 	}

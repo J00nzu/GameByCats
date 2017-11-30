@@ -5,36 +5,130 @@ using UnityEngine.Networking;
 
 public class BulletScript : NetworkBehaviour {
 
-    public bool collided = false;
+    [SyncVar]
+    public float damage = 1f;
     [SyncVar]
     public string player;
+    [SyncVar (hook = "PierceHook")]
+    protected bool piercing;
+
+    public bool collided = false;
+
+    Collider2D col;
+
+    int numCollided = 0;
+    int maxCollisions = 4;
+
+    List<GameObject> hitList = new List<GameObject>();
+    
 
 	// Use this for initialization
 	void Start () {
         StartCoroutine(Destroy());
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        col = GetComponent<Collider2D>();
+    }
+
+    // Update is called once per frame
+    void Update () {
+
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collided && collision.collider.transform.tag != "bullet" && collision.transform.name != player)
+        Debug.Log(collision.transform.tag);
+        if (!collided && collision.collider.transform.tag != "Bullet" && collision.transform.name != player)
         {
-            GetComponent<Collider2D>().enabled = false;
-            transform.parent = collision.transform;
-            collided = true;
-            Destroy(GetComponent<Rigidbody2D>());
+            transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
+            //var trail = transform.Find("Trail");
+            //trail.parent = null;
+           // GameObject.Destroy(trail.gameObject);
+
+            AttachTo(collision.transform);
+
+            if (collision.transform.tag == "Enemy" && !hitList.Contains(collision.gameObject))
+            {
+                Debug.Log("enemy hit");
+                collision.collider.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
+            }
         }
+
+    }
+
+    private void _printlist<T>(List<T> l) {
+        if (l.Count == 0)
+        {
+            Debug.Log(l);
+            return;
+        }
+
+        string doggo = "[";
+        foreach (T t in l) {
+            doggo += t;
+            doggo += ", ";
+        }
+        doggo = doggo.Substring(0, doggo.Length - 2);
+        doggo += "]";
+        Debug.Log(doggo);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collided && collision.transform.tag != "Bullet" && collision.transform.name != player)
+        {
+            if (!hitList.Contains(collision.gameObject))
+            {
+                hitList.Add(collision.gameObject);
+            }
+            else
+            {
+                return;
+            }
+
+            if (collision.transform.tag == "Enemy")
+            {
+                Debug.Log("enemy hit");
+                collision.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
+                
+            }
+
+            Rigidbody2D rb2 = collision.GetComponent<Rigidbody2D>();
+            if (rb2 != null) {
+                var trb = GetComponent<Rigidbody2D>();
+                rb2.AddForce(trb.velocity * trb.mass, ForceMode2D.Impulse);
+                trb.velocity -= trb.velocity * 0.2f;
+                damage -= damage * 0.2f;
+            }
+
+            numCollided = hitList.Count;
+           
+            if (numCollided >= maxCollisions) {
+                AttachTo(collision.transform);
+            }
+        }
+    }
+
+    void AttachTo(Transform t) {
+        col.enabled = false;
+        transform.parent = t;
+        collided = true;
+        Destroy(GetComponent<Rigidbody2D>());
+    }
+
+    private void PierceHook(bool newval)
+    {
+        SetPiercing(newval);
+    }
+
+    public void SetPiercing(bool pierc) {
+        GetComponent<Collider2D>().isTrigger = pierc;
+        piercing = pierc;
     }
 
     IEnumerator Destroy()
     {
         yield return new WaitForSeconds(2f);
         if (collided)
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(60f);
         Destroy(gameObject);
     }
 }

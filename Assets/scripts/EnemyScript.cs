@@ -11,7 +11,10 @@ public class EnemyScript : NetworkBehaviour {
     Rigidbody2D rb;
 
     float moveSpeed = 5;
-    float acceleration = 10; 
+    float acceleration = 10;
+
+    [SyncVar]
+    public float hp = 10f;
 
 	// Use this for initialization
 	void Start () {
@@ -56,4 +59,14 @@ public class EnemyScript : NetworkBehaviour {
 	void ServerUpdate () {
 
 	}
+
+    [Server]
+    public void TakeDamage (float damage)
+    {
+        hp -= damage;
+        if(hp < 0)
+        {
+            NetworkServer.Destroy(gameObject);
+        }
+    }
 }
