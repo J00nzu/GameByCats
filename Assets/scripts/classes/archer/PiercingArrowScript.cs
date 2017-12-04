@@ -38,10 +38,12 @@ public class PiercingArrowScript : ArrowScript {
 
             if (collision.transform.tag == "Enemy")
             {
-                if(collision.gameObject.GetComponent<EnemyScript>() != null)
-                    collision.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
-                
-            }
+				var es = collision.gameObject.GetComponent<EnemyScript>();
+				if (es != null) {
+					es.TakeDamage(damage);
+				}
+
+			}
 
             Rigidbody2D rb2 = collision.GetComponent<Rigidbody2D>();
             if (rb2 != null) {

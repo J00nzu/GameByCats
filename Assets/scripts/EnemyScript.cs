@@ -11,26 +11,29 @@ public class EnemyScript : NetworkBehaviour {
     Rigidbody2D rb;
     public GameObject bloodSplatterPrefab;
 
-    public float moveSpeed = 4;
-    public float acceleration = 8;
+	[SyncVar]
+	public float moveSpeed = 4;
+	[SyncVar]
+	public float acceleration = 8;
 
     bool dead = false;
 
     [SyncVar]
     public float hp = 10f;
-    protected float max_hp; 
+	[SyncVar]
+    public float max_hp;
+
+	public float tenacity = 1f;
+
+	float stunTimer = 0;
 
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 		netDog = FindObjectOfType<NetDog>();
         rb = GetComponent<Rigidbody2D>();
 		if (Network.isClient) {
 		}
         max_hp = hp;
-        moveSpeed /= transform.localScale.x;
-        acceleration /= transform.localScale.x;
-        rb.drag *= transform.localScale.x;
-        rb.angularDrag *= transform.localScale.x;
     }
 	
 	// Update is called once per frame
@@ -45,6 +48,10 @@ public class EnemyScript : NetworkBehaviour {
     {
         if (!dead)
         {
+			if (stunTimer > 0) {
+				stunTimer -= Time.deltaTime;
+				return;
+			}
             float closestD = float.MaxValue;
             PlayerScript closestP = null;
             foreach (PlayerScript ps in netDog.players)
@@ -76,6 +83,9 @@ public class EnemyScript : NetworkBehaviour {
     public void TakeDamage (float damage)
     {
         hp -= damage;
+
+		stunTimer += damage / max_hp / tenacity * 2f;
+
         if(hp < 0 && !dead)
         {
             dead = true;

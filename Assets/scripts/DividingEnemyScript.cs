@@ -7,7 +7,13 @@ public class DividingEnemyScript : EnemyScript {
 
     public GameObject dividingEnemyPrefab;
 
-    [Server]
+	protected new void Start () {
+		base.Start();
+	}
+
+
+
+	[Server]
     protected override IEnumerator Die()
     {
         yield return new WaitForSeconds(2.5f);
@@ -21,8 +27,15 @@ public class DividingEnemyScript : EnemyScript {
                     transform.position + (Vector3)position,
                     Quaternion.identity);
                 enemy.transform.localScale = transform.localScale * 0.5f;
-                enemy.GetComponent<EnemyScript>().hp = max_hp * 0.5f;
-                NetworkServer.Spawn(enemy);
+
+				var es = enemy.GetComponent<EnemyScript>();
+
+				es.hp = max_hp * 0.5f;
+				es.max_hp = es.hp;
+				es.moveSpeed = moveSpeed + 2f;
+				es.acceleration = acceleration + 1f;
+
+				NetworkServer.Spawn(enemy);
             }
         }
         
