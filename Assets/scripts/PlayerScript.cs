@@ -15,23 +15,25 @@ public class PlayerScript : NetworkBehaviour {
         playerName = "player_" + GetComponent<NetworkIdentity>().netId;
         transform.name = playerName;
         SelectedArrow = ArrowPrefab;
+        var nd = FindObjectOfType<NetDog>();
+        nd.AddPlayer(this);
     }
 
 
 
     public override void OnStartLocalPlayer () {
+        Debug.Log("bleep");
         GetComponent<SpriteRenderer>().color = Color.green;
 		var nd = FindObjectOfType<NetDog>();
 		nd.SetLocalPlayer(this);
-		nd.AddPlayer(this);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
-    public void ChangeArrowType(string arrowName)
+    [Command]
+    public void Cmd_ChangeArrowType(string arrowName)
     {
         if(arrowName == "Normal")
         {

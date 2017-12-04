@@ -46,11 +46,11 @@ public class ControlScript : NetworkBehaviour {
 
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            player.ChangeArrowType("Normal");
+            player.Cmd_ChangeArrowType("Normal");
         }
         else if (Input.GetKey(KeyCode.Alpha2))
         {
-            player.ChangeArrowType("Ricocheting");
+            player.Cmd_ChangeArrowType("Ricocheting");
         }
     }
 

@@ -15,8 +15,9 @@ public class NetDog : NetworkBehaviour {
 		dog.OnPlayerSpawned(player.gameObject);
 	}
 
-	public void AddPlayer (PlayerScript player) {
+	public void AddPlayer(PlayerScript player) {
 		players.Add(player);
+        Debug.Log("added" + player.playerName);
 	} 
 
 }

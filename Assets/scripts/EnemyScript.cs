@@ -9,9 +9,12 @@ public class EnemyScript : NetworkBehaviour {
 
 	NetDog netDog;
     Rigidbody2D rb;
+    public GameObject pas;
 
     float moveSpeed = 5;
     float acceleration = 10;
+
+    bool dead = false;
 
     [SyncVar]
     public float hp = 10f;
@@ -34,25 +37,28 @@ public class EnemyScript : NetworkBehaviour {
 
     void LocalUpdate()
     {
-        float closestD = 100;
-        PlayerScript closestP = null;
-
-        foreach (PlayerScript ps in netDog.players)
+        if (!dead)
         {
-            float d = (ps.transform.position - transform.position).magnitude;
-            if (d < closestD)
+            float closestD = float.MaxValue;
+            PlayerScript closestP = null;
+            foreach (PlayerScript ps in netDog.players)
             {
-                closestP = ps;
+                float d = Vector2.Distance(ps.transform.position, transform.position);
+                if (d < closestD)
+                {
+                    closestP = ps;
+                    closestD = d;
+                }
             }
-        }
 
-        if (closestP != null)
-        {
-            Vector3 targetVel = (closestP.transform.position - transform.position).normalized * moveSpeed;
+            if (closestP != null)
+            {
+                Vector3 targetVel = (closestP.transform.position - transform.position).normalized * moveSpeed;
 
-            rb.velocity = Vector3.Lerp(rb.velocity, targetVel, acceleration * Time.deltaTime);
+                rb.velocity = Vector3.Lerp(rb.velocity, targetVel, acceleration * Time.deltaTime);
 
-            transform.right = closestP.transform.position - transform.position;
+                transform.right = closestP.transform.position - transform.position;
+            }
         }
     }
 
@@ -66,7 +72,24 @@ public class EnemyScript : NetworkBehaviour {
         hp -= damage;
         if(hp < 0)
         {
-            NetworkServer.Destroy(gameObject);
+            dead = true;
+            rb.drag = 25;
+            rb.angularDrag = 50;
+
+            var bloodSplatter = (GameObject)Instantiate(
+            pas,
+            transform.position,
+            Quaternion.identity);
+
+            NetworkServer.Spawn(bloodSplatter);
+            StartCoroutine(Die());
         }
+    }
+    [Server]
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(5f);
+
+        NetworkServer.Destroy(gameObject);
     }
 }

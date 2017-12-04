@@ -35,7 +35,6 @@ public class ArrowScript : NetworkBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.transform.tag);
         if (!collided && collision.collider.transform.tag != "Arrow" && collision.transform.name != player)
         {
             transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
@@ -44,7 +43,6 @@ public class ArrowScript : NetworkBehaviour {
 
             if (collision.transform.tag == "Enemy" && !hitList.Contains(collision.gameObject))
             {
-                Debug.Log("enemy hit");
                 collision.collider.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
             }
         }

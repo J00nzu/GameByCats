@@ -20,7 +20,7 @@ public class WaveSpawnerScript : NetworkBehaviour {
 	void Update () {
 		
 	}
-
+    [Server]
     IEnumerator SpawnWave()
     {
         for (int i = 0; i < wavesToSpawn; i++)
@@ -32,6 +32,7 @@ public class WaveSpawnerScript : NetworkBehaviour {
                 enemyPrefab,
                 position,
                 Quaternion.identity);
+                NetworkServer.Spawn(enemy);
                 yield return new WaitForSeconds(Random.Range(0f, 2.5f));
             }
 
