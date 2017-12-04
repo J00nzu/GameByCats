@@ -31,6 +31,12 @@ public class ArcheryScript : ClassScript {
 
 	// Update is called once per frame
 	void Update () {
+		if (player.isLocalPlayer) {
+			LocalPlayerUpdate();
+		}
+	}
+
+	void LocalPlayerUpdate () {
 		timeSinceLastShot += Time.deltaTime;
 		if (Input.GetMouseButtonDown(0)) {
 			StartCoroutine(ShotTimer());

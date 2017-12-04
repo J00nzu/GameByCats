@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353aad9ec3d307143af3eb23ee84c3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   player: 
   collided: 0
   maxCollisions: 6
