@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 58259599826989022}
   - component: {fileID: 114329851686317470}
   - component: {fileID: 114901331184818586}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: 
+  isLocalPlayer: 0
 --- !u!114 &114782003299334860
 MonoBehaviour:
   m_ObjectHideFlags: 1
