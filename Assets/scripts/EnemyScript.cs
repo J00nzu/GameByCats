@@ -11,8 +11,8 @@ public class EnemyScript : NetworkBehaviour {
     Rigidbody2D rb;
     public GameObject pas;
 
-    float moveSpeed = 5;
-    float acceleration = 10;
+    float moveSpeed = 4;
+    float acceleration = 8;
 
     bool dead = false;
 
@@ -70,7 +70,7 @@ public class EnemyScript : NetworkBehaviour {
     public void TakeDamage (float damage)
     {
         hp -= damage;
-        if(hp < 0)
+        if(hp < 0 && !dead)
         {
             dead = true;
             rb.drag = 25;

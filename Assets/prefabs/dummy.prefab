@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4677709183650758}
   - component: {fileID: 212572873578702488}
   - component: {fileID: 114037733451284136}
-  - component: {fileID: 114542446950416760}
   - component: {fileID: 114782003299334860}
   - component: {fileID: 50734402704139190}
   - component: {fileID: 58259599826989022}
@@ -112,19 +111,6 @@ MonoBehaviour:
     i15: 159
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114542446950416760
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1199885814387116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e156667fff54e6a41833cbe258e7bf58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 0}
-  playerName: 
 --- !u!114 &114782003299334860
 MonoBehaviour:
   m_ObjectHideFlags: 1
