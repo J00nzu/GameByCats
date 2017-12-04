@@ -9,15 +9,16 @@ public class EnemyScript : NetworkBehaviour {
 
 	NetDog netDog;
     Rigidbody2D rb;
-    public GameObject pas;
+    public GameObject bloodSplatterPrefab;
 
-    float moveSpeed = 4;
-    float acceleration = 8;
+    public float moveSpeed = 4;
+    public float acceleration = 8;
 
     bool dead = false;
 
     [SyncVar]
     public float hp = 10f;
+    protected float max_hp; 
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +26,12 @@ public class EnemyScript : NetworkBehaviour {
         rb = GetComponent<Rigidbody2D>();
 		if (Network.isClient) {
 		}
-	}
+        max_hp = hp;
+        moveSpeed /= transform.localScale.x;
+        acceleration /= transform.localScale.x;
+        rb.drag *= transform.localScale.x;
+        rb.angularDrag *= transform.localScale.x;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -77,16 +83,18 @@ public class EnemyScript : NetworkBehaviour {
             rb.angularDrag = 50;
 
             var bloodSplatter = (GameObject)Instantiate(
-            pas,
+            bloodSplatterPrefab,
             transform.position,
             Quaternion.identity);
+
+            bloodSplatter.transform.localScale = transform.localScale;
 
             NetworkServer.Spawn(bloodSplatter);
             StartCoroutine(Die());
         }
     }
     [Server]
-    IEnumerator Die()
+    protected virtual IEnumerator Die()
     {
         yield return new WaitForSeconds(5f);
 
