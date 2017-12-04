@@ -1,11 +1,13 @@
 fileFormatVersion: 2
 guid: 55f56a2330517c54bb9d6da487361b40
-timeCreated: 1512057663
+timeCreated: 1512411695
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - drawBPrefab: {fileID: 1917126341114960, guid: 70ce20bfdd2d2524f9c00388f7a0b048,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

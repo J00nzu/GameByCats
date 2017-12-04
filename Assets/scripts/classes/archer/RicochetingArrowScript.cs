@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class RicochetingArrowScript : ArrowScript {
+public class RicochetingArrowScript : PiercingArrowScript {
         
     GameObject nearestEnemy;
     GameObject secondNearestEnemy;
     GameObject previousEnemy;
 
-    // Use this for initialization
-    void Start () {
-        StartCoroutine(Destroy());
-        col = GetComponent<Collider2D>();
+	// Use this for initialization
+	protected new void Start () {
+		base.Start();
     }
 	
 	// Update is called once per frame
@@ -37,7 +36,6 @@ public class RicochetingArrowScript : ArrowScript {
             {
                 float nearestDistance = float.MaxValue;
                 float distance;
-                collided = true;
                 previousEnemy = collider.gameObject;
 
                 if (collider.gameObject.GetComponent<EnemyScript>() != null)
@@ -55,7 +53,15 @@ public class RicochetingArrowScript : ArrowScript {
                     trb.velocity -= trb.velocity * 0.2f;
                 }
 
-                Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 50f);
+				numCollided = hitList.Count;
+
+				if (numCollided >= maxCollisions) {
+					AttachTo(collider.transform);
+					transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
+					return;
+				}
+
+				Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 50f);
                 foreach (Collider2D enemyCol in hitColliders)
                 {
                     if (enemyCol.transform.tag == "Enemy" && !hitList.Contains(enemyCol.gameObject))
@@ -83,11 +89,11 @@ public class RicochetingArrowScript : ArrowScript {
 
     }
 
-    IEnumerator Destroy()
+    protected override IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         if (collided)
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(60f);
         Destroy(gameObject);
     }
 }

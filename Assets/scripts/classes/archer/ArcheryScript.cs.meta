@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: b4eba7d232069074a993198447be5275
+timeCreated: 1512409933
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ArrowPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
+      type: 2}
+  - PiercingArrowPrefab: {fileID: 1140878602364582, guid: 5fb548d75b33bc444b35803422594932,
+      type: 2}
+  - RicochetingArrowPrefab: {fileID: 1140878602364582, guid: f08062e9a0a5d754091be40dae227b51,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

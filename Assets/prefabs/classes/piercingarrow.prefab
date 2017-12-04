@@ -39,9 +39,9 @@ GameObject:
   - component: {fileID: 114340626570981010}
   - component: {fileID: 114079585924943894}
   - component: {fileID: 61773561865433412}
-  - component: {fileID: 114716857135889410}
+  - component: {fileID: 114399869415311676}
   m_Layer: 9
-  m_Name: ricochetingArrow
+  m_Name: piercingarrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,8 +208,8 @@ TrailRenderer:
       m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.6, b: 0, a: 1}
-      key1: {r: 1, g: 0.6, b: 0, a: 0}
+      key0: {r: 1, g: 0, b: 0.80784315, a: 1}
+      key1: {r: 1, g: 0, b: 0.80784315, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -277,25 +277,25 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 240
-    i1: 128
-    i2: 98
-    i3: 233
-    i4: 160
-    i5: 165
-    i6: 215
-    i7: 84
-    i8: 9
-    i9: 27
-    i10: 228
-    i11: 13
-    i12: 174
-    i13: 34
-    i14: 123
-    i15: 81
+    i0: 95
+    i1: 181
+    i2: 72
+    i3: 215
+    i4: 91
+    i5: 51
+    i6: 188
+    i7: 68
+    i8: 75
+    i9: 53
+    i10: 128
+    i11: 52
+    i12: 34
+    i13: 89
+    i14: 73
+    i15: 50
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114716857135889410
+--- !u!114 &114399869415311676
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -303,12 +303,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1140878602364582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 353aad9ec3d307143af3eb23ee84c3ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 75fec6ead0bd32248afb769aab106a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   player: 
   collided: 0
+  maxCollisions: 6
 --- !u!212 &212796710146285234
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -344,7 +345,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9ce86eb0c1d16e445aef5964964174c9, type: 3}
-  m_Color: {r: 1, g: 0.6, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.8068962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

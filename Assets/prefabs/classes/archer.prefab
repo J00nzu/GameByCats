@@ -25,9 +25,9 @@ GameObject:
   - component: {fileID: 114782003299334860}
   - component: {fileID: 50734402704139190}
   - component: {fileID: 58259599826989022}
-  - component: {fileID: 114985270085669244}
+  - component: {fileID: 114329851686317470}
   m_Layer: 0
-  m_Name: player
+  m_Name: archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,6 +113,25 @@ MonoBehaviour:
     i15: 202
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114329851686317470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1199885814387116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4eba7d232069074a993198447be5275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
+    type: 2}
+  PiercingArrowPrefab: {fileID: 1140878602364582, guid: 5fb548d75b33bc444b35803422594932,
+    type: 2}
+  RicochetingArrowPrefab: {fileID: 1140878602364582, guid: f08062e9a0a5d754091be40dae227b51,
+    type: 2}
+  loadBar: {fileID: 0}
+  timeSinceLastShot: 0
 --- !u!114 &114542446950416760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,11 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e156667fff54e6a41833cbe258e7bf58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
-    type: 2}
-  RicochetingArrowPrefab: {fileID: 1140878602364582, guid: f08062e9a0a5d754091be40dae227b51,
-    type: 2}
-  SelectedArrow: {fileID: 0}
   playerName: 
 --- !u!114 &114782003299334860
 MonoBehaviour:
@@ -151,19 +165,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 10
   m_InterpolateMovement: 1
---- !u!114 &114985270085669244
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1199885814387116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f56a2330517c54bb9d6da487361b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawBPrefab: {fileID: 1917126341114960, guid: 70ce20bfdd2d2524f9c00388f7a0b048,
-    type: 2}
 --- !u!212 &212572873578702488
 SpriteRenderer:
   m_ObjectHideFlags: 1
