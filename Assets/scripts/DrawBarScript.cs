@@ -15,7 +15,7 @@ public class DrawBarScript : MonoBehaviour {
 
         drawBar = Instantiate(drawBPrefab).GetComponent<Slider>();
 
-        drawBar.transform.parent = canvas.transform;
+        drawBar.transform.SetParent(canvas.transform);
 	}
 	
 	// Update is called once per frame

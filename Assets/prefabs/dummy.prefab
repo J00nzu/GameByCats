@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 58259599826989022}
   m_Layer: 0
   m_Name: dummy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,8 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e156667fff54e6a41833cbe258e7bf58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
-    type: 2}
+  ArrowPrefab: {fileID: 0}
   playerName: 
 --- !u!114 &114782003299334860
 MonoBehaviour:

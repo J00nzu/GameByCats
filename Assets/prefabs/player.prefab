@@ -58,8 +58,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 10
+  m_AngularDrag: 30
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -124,8 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e156667fff54e6a41833cbe258e7bf58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
+  ArrowPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
     type: 2}
+  RicochetingArrowPrefab: {fileID: 1140878602364582, guid: f08062e9a0a5d754091be40dae227b51,
+    type: 2}
+  SelectedArrow: {fileID: 0}
   playerName: 
 --- !u!114 &114782003299334860
 MonoBehaviour:

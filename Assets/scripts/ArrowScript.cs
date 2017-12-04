@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class BulletScript : NetworkBehaviour {
+public class ArrowScript : NetworkBehaviour {
 
     [SyncVar]
     public float damage = 1f;
@@ -14,12 +14,12 @@ public class BulletScript : NetworkBehaviour {
 
     public bool collided = false;
 
-    Collider2D col;
+    protected Collider2D col;
 
-    int numCollided = 0;
-    int maxCollisions = 4;
+    protected int numCollided = 0;
+    protected int maxCollisions = 4;
 
-    List<GameObject> hitList = new List<GameObject>();
+    protected List<GameObject> hitList = new List<GameObject>();
     
 
 	// Use this for initialization
@@ -36,12 +36,9 @@ public class BulletScript : NetworkBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.transform.tag);
-        if (!collided && collision.collider.transform.tag != "Bullet" && collision.transform.name != player)
+        if (!collided && collision.collider.transform.tag != "Arrow" && collision.transform.name != player)
         {
             transform.Find("Trail").GetComponent<TrailRenderer>().enabled = false;
-            //var trail = transform.Find("Trail");
-            //trail.parent = null;
-           // GameObject.Destroy(trail.gameObject);
 
             AttachTo(collision.transform);
 
@@ -73,7 +70,7 @@ public class BulletScript : NetworkBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collided && collision.transform.tag != "Bullet" && collision.transform.name != player)
+        if (!collided && collision.transform.tag != "Arrow" && collision.transform.name != player)
         {
             if (!hitList.Contains(collision.gameObject))
             {
@@ -86,8 +83,8 @@ public class BulletScript : NetworkBehaviour {
 
             if (collision.transform.tag == "Enemy")
             {
-                Debug.Log("enemy hit");
-                collision.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
+                if(collision.gameObject.GetComponent<EnemyScript>() != null)
+                    collision.gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
                 
             }
 

@@ -44,15 +44,15 @@ public class ControlScript : NetworkBehaviour {
             StartCoroutine(ShotTimer());
 		}
 
-	}
-
-	void LocalUpdate () {
-
-	}
-
-	void FixedUpdate () {
-
-	}
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            player.ChangeArrowType("Normal");
+        }
+        else if (Input.GetKey(KeyCode.Alpha2))
+        {
+            player.ChangeArrowType("Ricocheting");
+        }
+    }
 
     IEnumerator ShotTimer()
     {
@@ -60,8 +60,6 @@ public class ControlScript : NetworkBehaviour {
         float speedMultiplier = 1f;
         float holdTimer = 0;
         bool piercing = false;
-
-        float x = 0f;
 
         while (Input.GetMouseButton(0)) {
             holdTimer += Time.deltaTime;
@@ -83,7 +81,7 @@ public class ControlScript : NetworkBehaviour {
             damageMultiplier *= timeSinceLastShot;
         }
         else {
-            
+            // Do nothing
         }
         player.Cmd_BaseAttack(transform.position, transform.right, damageMultiplier, speedMultiplier, piercing);
         timeSinceLastShot = 0f;

@@ -5,13 +5,16 @@ using UnityEngine.Networking;
 
 public class PlayerScript : NetworkBehaviour {
 
-	public GameObject bulletPrefab;
+	public GameObject ArrowPrefab;
+    public GameObject RicochetingArrowPrefab;
+    public GameObject SelectedArrow;
     public string playerName;
 
 	// Use this for initialization
 	void Start () {
         playerName = "player_" + GetComponent<NetworkIdentity>().netId;
         transform.name = playerName;
+        SelectedArrow = ArrowPrefab;
     }
 
 
@@ -28,26 +31,38 @@ public class PlayerScript : NetworkBehaviour {
 		
 	}
 
+    public void ChangeArrowType(string arrowName)
+    {
+        if(arrowName == "Normal")
+        {
+            SelectedArrow = ArrowPrefab;
+        }
+        else if(arrowName == "Ricocheting")
+        {
+            SelectedArrow = RicochetingArrowPrefab;
+        }
+    }
+
     [Command]
 	public void Cmd_BaseAttack (Vector2 position, Vector2 direction, float damageMultiplier, float speedMultiplier, bool piercing) {
-		// Create the Bullet from the Bullet Prefab
-		var bullet = (GameObject)Instantiate(
-			bulletPrefab,
+		
+        // Create the Arrow from the Arrow Prefab
+		var Arrow = (GameObject)Instantiate(
+			SelectedArrow,
 			position + direction*1, 
 			Quaternion.identity);
 
-		bullet.transform.right = direction;
+		Arrow.transform.right = direction;
 
-		// Add velocity to the bullet
-		bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * 16 * speedMultiplier;
-
-        BulletScript bscript = bullet.GetComponent<BulletScript>();
+		// Add velocity to the Arrow
+		Arrow.GetComponent<Rigidbody2D>().velocity = Arrow.transform.right * 16 * speedMultiplier;
+        
+        var bscript = Arrow.GetComponent<ArrowScript>();
         bscript.player = playerName;
         bscript.damage *= damageMultiplier;
         if (piercing) {
             bscript.SetPiercing(piercing);
         }
-        NetworkServer.Spawn(bullet);
-        // Destroy the bullet after 2 seconds
+        NetworkServer.Spawn(Arrow);
 	}
 }

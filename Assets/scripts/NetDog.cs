@@ -12,10 +12,6 @@ public class NetDog : NetworkBehaviour {
 	public void SetLocalPlayer (PlayerScript player) {
 		localPlayer = player;
 		dog = GetComponent<Dog>();
-		Debug.Log(Camera.main);
-		Debug.Log(Camera.main.GetComponent<CamScript>());
-		Debug.Log(FindObjectOfType<CamScript>());
-		Debug.Log(player.gameObject);
 		dog.OnPlayerSpawned(player.gameObject);
 	}
 
