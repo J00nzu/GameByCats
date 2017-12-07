@@ -7,8 +7,6 @@ public class PlayerScript : NetworkBehaviour {
 
     public string playerName;
 
-	public bool isLocalPlayer = false;
-
 	// Use this for initialization
 	void Start () {
         playerName = "player_" + GetComponent<NetworkIdentity>().netId;
@@ -24,7 +22,6 @@ public class PlayerScript : NetworkBehaviour {
         GetComponent<SpriteRenderer>().color = Color.green;
 		var nd = FindObjectOfType<NetDog>();
 		nd.SetLocalPlayer(this);
-		isLocalPlayer = true;
 	}
 	
 	// Update is called once per frame

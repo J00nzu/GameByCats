@@ -150,6 +150,7 @@ MonoBehaviour:
   acceleration: 6
   hp: 40
   max_hp: 0
+  tenacity: 1
   dividingEnemyPrefab: {fileID: 1199885814387116}
 --- !u!212 &212572873578702488
 SpriteRenderer:

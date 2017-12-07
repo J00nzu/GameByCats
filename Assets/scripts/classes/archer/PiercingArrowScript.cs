@@ -39,7 +39,7 @@ public class PiercingArrowScript : ArrowScript {
             if (collision.transform.tag == "Enemy")
             {
 				var es = collision.gameObject.GetComponent<EnemyScript>();
-				if (es != null) {
+				if (es != null /*&& Network.isServer*/) {
 					es.TakeDamage(damage);
 				}
 

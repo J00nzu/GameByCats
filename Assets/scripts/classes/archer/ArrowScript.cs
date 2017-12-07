@@ -36,7 +36,7 @@ public class ArrowScript : NetworkBehaviour {
             if (collision.transform.tag == "Enemy")
             {
 				var es = collision.collider.gameObject.GetComponent<EnemyScript>();
-				if (es != null) {
+				if (es != null /*&& Network.isServer*/) {
 					es.TakeDamage(damage);
 				}
 			}

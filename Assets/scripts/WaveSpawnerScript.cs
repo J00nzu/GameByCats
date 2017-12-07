@@ -20,6 +20,7 @@ public class WaveSpawnerScript : NetworkBehaviour {
 	void Update () {
 		
 	}
+
     [Server]
     IEnumerator SpawnWave()
     {

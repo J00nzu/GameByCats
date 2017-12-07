@@ -41,7 +41,7 @@ public class RicochetingArrowScript : PiercingArrowScript {
                 if (collider.gameObject.GetComponent<EnemyScript>() != null)
                 {
 					var es = collider.gameObject.GetComponent<EnemyScript>();
-					if (es != null) {
+					if (es != null /*&& Network.isServer*/) {
 						es.TakeDamage(damage);
 					}
 					damage *= 0.75f;
