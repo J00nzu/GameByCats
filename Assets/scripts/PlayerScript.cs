@@ -9,6 +9,8 @@ public class PlayerScript : NetworkBehaviour {
 
 	public bool isLocalPlayer = false;
 
+    public bool stealthed;
+
 	// Use this for initialization
 	void Start () {
         playerName = "player_" + GetComponent<NetworkIdentity>().netId;
@@ -20,7 +22,6 @@ public class PlayerScript : NetworkBehaviour {
 
 
     public override void OnStartLocalPlayer () {
-        Debug.Log("bleep");
         GetComponent<SpriteRenderer>().color = Color.green;
 		var nd = FindObjectOfType<NetDog>();
 		nd.SetLocalPlayer(this);

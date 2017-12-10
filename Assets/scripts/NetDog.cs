@@ -17,7 +17,6 @@ public class NetDog : NetworkBehaviour {
 
 	public void AddPlayer(PlayerScript player) {
 		players.Add(player);
-        Debug.Log("added" + player.playerName);
 	} 
 
 }

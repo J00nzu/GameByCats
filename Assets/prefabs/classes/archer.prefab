@@ -131,6 +131,8 @@ MonoBehaviour:
     type: 2}
   RicochetingArrowPrefab: {fileID: 1140878602364582, guid: f08062e9a0a5d754091be40dae227b51,
     type: 2}
+  SmokePoofPrefab: {fileID: 1833567476619656, guid: 4d7ac3caa7b8c694d8658e0984ba168c,
+    type: 2}
   loadBar: {fileID: 0}
   timeSinceLastShot: 0
 --- !u!114 &114542446950416760
@@ -146,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: 
   isLocalPlayer: 0
+  stealthed: 0
 --- !u!114 &114782003299334860
 MonoBehaviour:
   m_ObjectHideFlags: 1
