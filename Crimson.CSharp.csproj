@@ -238,6 +238,7 @@
     <Compile Include="Assets\scripts\Dog.cs" />
     <Compile Include="Assets\scripts\EnemyScript.cs" />
     <Compile Include="Assets\scripts\EnemySpawn.cs" />
+    <Compile Include="Assets\scripts\HiveScript.cs" />
     <Compile Include="Assets\scripts\NetDog.cs" />
     <Compile Include="Assets\scripts\NetGuard.cs" />
     <Compile Include="Assets\scripts\NuNetworkManager.cs" />

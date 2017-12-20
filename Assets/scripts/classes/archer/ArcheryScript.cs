@@ -60,7 +60,7 @@ public class ArcheryScript : ClassScript {
         }
 	}
 
-    [ClientRpc]
+   [ClientRpc]
    void Rpc_ToggleStealth(bool val)
     {
         player.stealthed = val;
