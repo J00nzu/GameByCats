@@ -44,7 +44,14 @@ public class EnemyScript : NetworkBehaviour {
 		LocalUpdate();
 	}
 
-    void LocalUpdate()
+	protected virtual IEnumerable<Transform> GetTargets () {
+		foreach (PlayerScript ps in netDog.players) {
+			if(!ps.stealthed)
+				yield return ps.transform;
+		}
+	}
+
+	void LocalUpdate()
     {
         if (!dead)
         {
@@ -53,27 +60,25 @@ public class EnemyScript : NetworkBehaviour {
 				return;
 			}
             float closestD = float.MaxValue;
-            PlayerScript closestP = null;
-            foreach (PlayerScript ps in netDog.players)
+            Transform closestP = null;
+            foreach (Transform t in GetTargets())
             {
-                if (!ps.stealthed)
+               
+                float d = Vector2.Distance(t.position, transform.position);
+                if (d < closestD)
                 {
-                    float d = Vector2.Distance(ps.transform.position, transform.position);
-                    if (d < closestD)
-                    {
-                        closestP = ps;
-                        closestD = d;
-                    }
+                    closestP = t;
+                    closestD = d;
                 }
             }
 
             if (closestP != null)
             {
-                Vector3 targetVel = (closestP.transform.position - transform.position).normalized * moveSpeed;
+                Vector3 targetVel = (closestP.position - transform.position).normalized * moveSpeed;
 
                 rb.velocity = Vector3.Lerp(rb.velocity, targetVel, acceleration * Time.deltaTime);
 
-                transform.right = closestP.transform.position - transform.position;
+                transform.right = closestP.position - transform.position;
             }
         }
     }
