@@ -40,6 +40,14 @@ public class ArrowScript : NetworkBehaviour {
 					es.TakeDamage(damage);
 				}
 			}
+            else if (collision.transform.tag == "Hive")
+            {
+                var hs = collision.collider.gameObject.GetComponent<HiveScript>();
+                if (hs != null)
+                {
+                    hs.TakeDamage(damage);
+                }
+            }
         }
 
     }

@@ -8,9 +8,13 @@ public class ArcheryScript : ClassScript {
 
 	PlayerScript player;
 
+    SpriteRenderer sprite;
+
 	public GameObject ArrowPrefab;
 	public GameObject PiercingArrowPrefab;
 	public GameObject RicochetingArrowPrefab;
+
+    public GameObject SmokePoofPrefab;
 
 	public DrawBarScript loadBar;
 
@@ -27,7 +31,8 @@ public class ArcheryScript : ClassScript {
 	void Start () {
 		player = GetComponentInChildren<PlayerScript>();
 		loadBar = gameObject.GetComponent<DrawBarScript>();
-	}
+        sprite = player.gameObject.GetComponent<SpriteRenderer>();
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -48,10 +53,30 @@ public class ArcheryScript : ClassScript {
 		} else if (Input.GetKey(KeyCode.Alpha2)) {
 			mode = SpecialMode.Ricochet;
 		}
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Rpc_ToggleStealth(!player.stealthed);
+        }
 	}
 
+    [ClientRpc]
+   void Rpc_ToggleStealth(bool val)
+    {
+        player.stealthed = val;
+        if (player.stealthed)
+        {
+            var SmokePoof = (GameObject)Instantiate(
+            SmokePoofPrefab,
+            transform.position,
+            Quaternion.identity);
+            Destroy(SmokePoof, 2f);
+        }
+        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, val?0.2f:1f);
 
-	IEnumerator ShotTimer () {
+    }
+
+    IEnumerator ShotTimer () {
 		float damageMultiplier = 1f;
 		float speedMultiplier = 1f;
 		float holdTimer = 0;

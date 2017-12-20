@@ -56,11 +56,14 @@ public class EnemyScript : NetworkBehaviour {
             PlayerScript closestP = null;
             foreach (PlayerScript ps in netDog.players)
             {
-                float d = Vector2.Distance(ps.transform.position, transform.position);
-                if (d < closestD)
+                if (!ps.stealthed)
                 {
-                    closestP = ps;
-                    closestD = d;
+                    float d = Vector2.Distance(ps.transform.position, transform.position);
+                    if (d < closestD)
+                    {
+                        closestP = ps;
+                        closestD = d;
+                    }
                 }
             }
 
