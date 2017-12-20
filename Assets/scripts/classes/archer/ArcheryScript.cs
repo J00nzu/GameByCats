@@ -6,10 +6,6 @@ using UnityEngine.Networking;
 
 public class ArcheryScript : ClassScript {
 
-	PlayerScript player;
-
-    SpriteRenderer sprite;
-
 	public GameObject ArrowPrefab;
 	public GameObject PiercingArrowPrefab;
 	public GameObject RicochetingArrowPrefab;
@@ -28,10 +24,8 @@ public class ArcheryScript : ClassScript {
 	SpecialMode mode;
 
 	// Use this for initialization
-	void Start () {
-		player = GetComponentInChildren<PlayerScript>();
-		loadBar = gameObject.GetComponent<DrawBarScript>();
-        sprite = player.gameObject.GetComponent<SpriteRenderer>();
+	void ClassStart () {
+        loadBar = gameObject.GetComponent<DrawBarScript>();
     }
 
 	// Update is called once per frame
@@ -41,7 +35,7 @@ public class ArcheryScript : ClassScript {
 		}
 	}
 
-	void LocalPlayerUpdate () {
+	protected override void LocalPlayerUpdate () {
 		timeSinceLastShot += Time.deltaTime;
 		if (Input.GetMouseButtonDown(0)) {
 			StartCoroutine(ShotTimer());

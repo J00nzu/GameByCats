@@ -232,6 +232,7 @@
     <Compile Include="Assets\scripts\classes\archer\PiercingArrowScript.cs" />
     <Compile Include="Assets\scripts\classes\archer\RicochetingArrowScript.cs" />
     <Compile Include="Assets\scripts\classes\ClassScript.cs" />
+    <Compile Include="Assets\scripts\classes\necromancer\NecromancerScript.cs" />
     <Compile Include="Assets\scripts\classes\warrior\WarriorScript.cs" />
     <Compile Include="Assets\scripts\ControlScript.cs" />
     <Compile Include="Assets\scripts\DividingEnemyScript.cs" />
