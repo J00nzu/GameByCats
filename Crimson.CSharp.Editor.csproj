@@ -290,5 +290,8 @@
   <ItemGroup>
     <Compile Include="Assets\scripts\editor\LoadMenuScene.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Fonts\OpenSans\License!.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
