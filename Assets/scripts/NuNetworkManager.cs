@@ -9,15 +9,17 @@ public class NuNetworkManager : NetworkManager {
 
 	public Button archerButton;
 	public Button warriorButton;
+    public Button nekoromancerButton;
 
-	int avatarIndex;
+    int avatarIndex;
 
 	// Use this for initialization
 	void Start () {
 		archerButton.onClick.AddListener(delegate { playerClassPicker(archerButton.name); });
 		warriorButton.onClick.AddListener(delegate { playerClassPicker(warriorButton.name); });
+        nekoromancerButton.onClick.AddListener(delegate { playerClassPicker(nekoromancerButton.name); });
 
-	}
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -32,7 +34,10 @@ public class NuNetworkManager : NetworkManager {
 			case ("warrior"):
 				avatarIndex = 1;
 				break;
-		}
+            case ("nekoromancer"):
+                avatarIndex = 2;
+                break;
+        }
 
 		playerPrefab = spawnPrefabs[avatarIndex];
 	}

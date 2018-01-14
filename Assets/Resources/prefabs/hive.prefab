@@ -21,15 +21,13 @@ GameObject:
   - component: {fileID: 4677709183650758}
   - component: {fileID: 212572873578702488}
   - component: {fileID: 114037733451284136}
-  - component: {fileID: 114542446950416760}
   - component: {fileID: 114782003299334860}
   - component: {fileID: 50734402704139190}
   - component: {fileID: 58259599826989022}
-  - component: {fileID: 114329851686317470}
-  - component: {fileID: 114901331184818586}
-  m_Layer: 10
-  m_Name: archer
-  m_TagString: Untagged
+  - component: {fileID: 114983490790979876}
+  m_Layer: 0
+  m_Name: hive
+  m_TagString: Hive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199885814387116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.007094, y: -2.7123785, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 8.028476, y: -0.75997853, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,7 +52,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199885814387116}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -96,60 +94,24 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 15
-    i1: 230
-    i2: 248
-    i3: 50
-    i4: 55
-    i5: 96
-    i6: 245
-    i7: 212
-    i8: 88
-    i9: 90
-    i10: 148
-    i11: 68
-    i12: 153
-    i13: 64
-    i14: 32
-    i15: 202
+    i0: 202
+    i1: 212
+    i2: 8
+    i3: 212
+    i4: 123
+    i5: 32
+    i6: 140
+    i7: 148
+    i8: 249
+    i9: 78
+    i10: 63
+    i11: 83
+    i12: 223
+    i13: 57
+    i14: 105
+    i15: 213
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114329851686317470
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1199885814387116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4eba7d232069074a993198447be5275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
-    type: 2}
-  PiercingArrowPrefab: {fileID: 1140878602364582, guid: 5fb548d75b33bc444b35803422594932,
-    type: 2}
-  RicochetingArrowPrefab: {fileID: 1140878602364582, guid: f08062e9a0a5d754091be40dae227b51,
-    type: 2}
-  SmokePoofPrefab: {fileID: 1833567476619656, guid: 4d7ac3caa7b8c694d8658e0984ba168c,
-    type: 2}
-  loadBar: {fileID: 0}
-  timeSinceLastShot: 0
---- !u!114 &114542446950416760
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1199885814387116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e156667fff54e6a41833cbe258e7bf58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: 
-  stealthed: 0
-  playerLightPrefab: {fileID: 1539921165623528, guid: ee5766cb8bb72654c82d77b577d130f5,
-    type: 2}
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114782003299334860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,7 +133,7 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 10
   m_InterpolateMovement: 1
---- !u!114 &114901331184818586
+--- !u!114 &114983490790979876
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -179,11 +141,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1199885814387116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f56a2330517c54bb9d6da487361b40, type: 3}
+  m_Script: {fileID: 11500000, guid: b3e7813bd03ad50438b71ff09642ee95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawBPrefab: {fileID: 1917126341114960, guid: 70ce20bfdd2d2524f9c00388f7a0b048,
+  enemyPrefab: {fileID: 1199885814387116, guid: eac78d1abe9ea75408b7a0bb8c3c3350,
     type: 2}
+  hp: 50
 --- !u!212 &212572873578702488
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -219,7 +182,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a66d3b3a540c1104ebfa23711d269ff6, type: 3}
-  m_Color: {r: 0.21906671, g: 0.19117647, b: 1, a: 1}
+  m_Color: {r: 0.4044118, g: 0.2599119, b: 0.13381273, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

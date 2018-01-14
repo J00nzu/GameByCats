@@ -24,10 +24,10 @@ GameObject:
   - component: {fileID: 114782003299334860}
   - component: {fileID: 50734402704139190}
   - component: {fileID: 58259599826989022}
-  - component: {fileID: 114983490790979876}
+  - component: {fileID: 114270878515681160}
   m_Layer: 0
-  m_Name: hive
-  m_TagString: Hive
+  m_Name: skellington
+  m_TagString: Skellington
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199885814387116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -4.6819024, y: -4.1423116, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,13 +52,13 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199885814387116}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
-  m_AngularDrag: 30
+  m_LinearDrag: 2
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -94,24 +94,41 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 202
-    i1: 212
-    i2: 8
-    i3: 212
-    i4: 123
-    i5: 32
-    i6: 140
-    i7: 148
-    i8: 249
-    i9: 78
-    i10: 63
-    i11: 83
-    i12: 223
-    i13: 57
-    i14: 105
-    i15: 213
+    i0: 248
+    i1: 20
+    i2: 180
+    i3: 51
+    i4: 7
+    i5: 24
+    i6: 79
+    i7: 84
+    i8: 152
+    i9: 141
+    i10: 2
+    i11: 52
+    i12: 45
+    i13: 168
+    i14: 101
+    i15: 106
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114270878515681160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1199885814387116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979744a82d2e2b3469e96cea5f401783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterPrefab: {fileID: 0}
+  moveSpeed: 4
+  acceleration: 8
+  hp: 10
+  max_hp: 0
+  tenacity: 1
 --- !u!114 &114782003299334860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,20 +150,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 10
   m_InterpolateMovement: 1
---- !u!114 &114983490790979876
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1199885814387116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e7813bd03ad50438b71ff09642ee95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1199885814387116, guid: eac78d1abe9ea75408b7a0bb8c3c3350,
-    type: 2}
-  hp: 50
 --- !u!212 &212572873578702488
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -161,7 +164,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c138117da64ab3e41956ad606a6fe098, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -182,7 +185,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a66d3b3a540c1104ebfa23711d269ff6, type: 3}
-  m_Color: {r: 0.4044118, g: 0.2599119, b: 0.13381273, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
