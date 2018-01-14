@@ -24,7 +24,7 @@ public class ArcheryScript : ClassScript {
 	SpecialMode mode;
 
 	// Use this for initialization
-	void ClassStart () {
+	protected override void ClassStart () {
         loadBar = gameObject.GetComponent<DrawBarScript>();
     }
 
