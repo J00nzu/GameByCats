@@ -9,18 +9,23 @@ public class PlayerScript : NetworkBehaviour {
 
     public bool stealthed;
 
+    public GameObject playerLightPrefab;
+    GameObject playerLight;
+
 	// Use this for initialization
 	void Start () {
         playerName = "player_" + GetComponent<NetworkIdentity>().netId;
         transform.name = playerName;
         var nd = FindObjectOfType<NetDog>();
         nd.AddPlayer(this);
+        playerLight = Instantiate(playerLightPrefab, transform.position, Quaternion.identity) as GameObject;
+        playerLight.GetComponent<StayOnTopOf>().target = transform;
     }
 
 
 
     public override void OnStartLocalPlayer () {
-        GetComponent<SpriteRenderer>().color = Color.green;
+        //GetComponent<SpriteRenderer>().color = Color.green;
 		var nd = FindObjectOfType<NetDog>();
 		nd.SetLocalPlayer(this);
 	}

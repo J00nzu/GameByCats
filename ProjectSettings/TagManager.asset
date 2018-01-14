@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Arrow
   - Hive
+  - Skellington
   layers:
   - Default
   - TransparentFX

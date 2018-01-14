@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class EnemyScript : NetworkBehaviour {
 
-	NetDog netDog;
+	protected NetDog netDog;
     Rigidbody2D rb;
     public GameObject bloodSplatterPrefab;
 
@@ -31,7 +31,8 @@ public class EnemyScript : NetworkBehaviour {
 	protected void Start () {
 		netDog = FindObjectOfType<NetDog>();
         rb = GetComponent<Rigidbody2D>();
-		if (Network.isClient) {
+        netDog.AddEnemy(this);
+        if (Network.isClient) {
 		}
         max_hp = hp;
     }
@@ -106,6 +107,8 @@ public class EnemyScript : NetworkBehaviour {
             Quaternion.identity);
 
             bloodSplatter.transform.localScale = transform.localScale;
+
+            netDog.RemoveEnemy(this);
 
             NetworkServer.Spawn(bloodSplatter);
             StartCoroutine(Die());

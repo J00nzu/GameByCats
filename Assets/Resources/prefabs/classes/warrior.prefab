@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199885814387116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.72, y: -0.988, z: 0}
+  m_LocalPosition: {x: -8.72, y: -1.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4973176118571376}
@@ -302,6 +302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: 
   stealthed: 0
+  playerLightPrefab: {fileID: 1539921165623528, guid: ee5766cb8bb72654c82d77b577d130f5,
+    type: 2}
 --- !u!114 &114782003299334860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,7 +383,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c138117da64ab3e41956ad606a6fe098, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

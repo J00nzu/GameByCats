@@ -25,10 +25,9 @@ GameObject:
   - component: {fileID: 114782003299334860}
   - component: {fileID: 50734402704139190}
   - component: {fileID: 58259599826989022}
-  - component: {fileID: 114329851686317470}
-  - component: {fileID: 114901331184818586}
+  - component: {fileID: 114915448902189958}
   m_Layer: 10
-  m_Name: archer
+  m_Name: nekoromancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199885814387116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.007094, y: -2.7123785, z: 0}
+  m_LocalPosition: {x: -6.0090213, y: -6.46477, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,45 +95,24 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 15
-    i1: 230
-    i2: 248
-    i3: 50
-    i4: 55
-    i5: 96
-    i6: 245
-    i7: 212
-    i8: 88
-    i9: 90
-    i10: 148
-    i11: 68
-    i12: 153
-    i13: 64
-    i14: 32
-    i15: 202
+    i0: 114
+    i1: 82
+    i2: 48
+    i3: 180
+    i4: 123
+    i5: 21
+    i6: 203
+    i7: 4
+    i8: 121
+    i9: 50
+    i10: 65
+    i11: 16
+    i12: 49
+    i13: 51
+    i14: 251
+    i15: 6
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114329851686317470
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1199885814387116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4eba7d232069074a993198447be5275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
-    type: 2}
-  PiercingArrowPrefab: {fileID: 1140878602364582, guid: 5fb548d75b33bc444b35803422594932,
-    type: 2}
-  RicochetingArrowPrefab: {fileID: 1140878602364582, guid: f08062e9a0a5d754091be40dae227b51,
-    type: 2}
-  SmokePoofPrefab: {fileID: 1833567476619656, guid: 4d7ac3caa7b8c694d8658e0984ba168c,
-    type: 2}
-  loadBar: {fileID: 0}
-  timeSinceLastShot: 0
 --- !u!114 &114542446950416760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,7 +149,7 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 10
   m_InterpolateMovement: 1
---- !u!114 &114901331184818586
+--- !u!114 &114915448902189958
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -179,10 +157,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1199885814387116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f56a2330517c54bb9d6da487361b40, type: 3}
+  m_Script: {fileID: 11500000, guid: 74d4995a773d90944a512e2930878d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawBPrefab: {fileID: 1917126341114960, guid: 70ce20bfdd2d2524f9c00388f7a0b048,
+  SkellingtonPrefab: {fileID: 1199885814387116, guid: f814b43307184f54988d02342da8656a,
+    type: 2}
+  smokePoofPrefab: {fileID: 1833567476619656, guid: 4d7ac3caa7b8c694d8658e0984ba168c,
+    type: 2}
+  summoningEffectPrefab: {fileID: 1419649443024784, guid: 3275ede0f08f4a446a24f7bc6b527682,
     type: 2}
 --- !u!212 &212572873578702488
 SpriteRenderer:
@@ -219,7 +201,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a66d3b3a540c1104ebfa23711d269ff6, type: 3}
-  m_Color: {r: 0.21906671, g: 0.19117647, b: 1, a: 1}
+  m_Color: {r: 0.538083, g: 0, b: 0.5955882, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
