@@ -123,11 +123,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979744a82d2e2b3469e96cea5f401783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodSplatterPrefab: {fileID: 0}
+  bloodSplatterPrefab: {fileID: 1609768827244226, guid: ec14bb0ee53939b4386a46fe1b00102f,
+    type: 2}
+  XpBlobPrefab: {fileID: 1793998286532906, guid: 98c4ec6978506ac488aa14e7c33706f6,
+    type: 2}
   moveSpeed: 4
   acceleration: 8
-  hp: 10
-  max_hp: 0
+  hp: 15
+  max_hp: 15
   tenacity: 1
   attackEffectPrefab: {fileID: 1203025920445628, guid: 8c60ff4a02515ac469111766e8627507,
     type: 2}

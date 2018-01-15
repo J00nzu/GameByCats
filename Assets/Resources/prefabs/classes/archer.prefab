@@ -125,8 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4eba7d232069074a993198447be5275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkellingtonPrefab: {fileID: 0}
-  summoningEffectPrefab: {fileID: 0}
+  SkellingtonPrefab: {fileID: 1199885814387116, guid: f814b43307184f54988d02342da8656a,
+    type: 2}
+  summoningEffectPrefab: {fileID: 1419649443024784, guid: 3275ede0f08f4a446a24f7bc6b527682,
+    type: 2}
   ArrowPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
     type: 2}
   PiercingArrowPrefab: {fileID: 1140878602364582, guid: 5fb548d75b33bc444b35803422594932,

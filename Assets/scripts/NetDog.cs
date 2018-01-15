@@ -7,7 +7,9 @@ public class NetDog : NetworkBehaviour {
 
 	public List<PlayerScript> players = new List<PlayerScript>();
     public List<EnemyScript> enemies = new List<EnemyScript>();
-    public PlayerScript localPlayer;
+	public List<EnemyScript> spookyScarySkellingtons = new List<EnemyScript>();
+
+	public PlayerScript localPlayer;
 	Dog dog;
 
     public void SetLocalPlayer (PlayerScript player) {
@@ -22,11 +24,19 @@ public class NetDog : NetworkBehaviour {
 
     public void AddEnemy(EnemyScript enemy)
     {
-        enemies.Add(enemy);
-    }
+		if (enemy.tag == "Skellington") {
+			spookyScarySkellingtons.Add(enemy);
+		} else {
+			enemies.Add(enemy);
+		}
+	}
 
     public void RemoveEnemy(EnemyScript enemy)
     {
-        enemies.Remove(enemy);
-    }
+		if (enemy.tag == "Skellington") {
+			spookyScarySkellingtons.Remove(enemy);
+		} else {
+			enemies.Remove(enemy);
+		}
+	}
 }

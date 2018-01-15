@@ -55,6 +55,9 @@ public class WaveSpawnerScript : NetworkBehaviour {
 			}
 			while (dog.enemies.Count > 0) {
 				yield return null;
+				if (dog.enemies.Count == 0) {
+					yield return new WaitForSeconds(4);
+				}
 			}
 			IncreaseWave();
 		}

@@ -56,10 +56,8 @@ public class EnemyScript : NetworkBehaviour {
 			if(!ps.stealthed)
 				yield return ps.transform;
 		}
-		foreach (EnemyScript es in netDog.enemies) {
-			if (es.tag == "Skellington") {
-				yield return es.transform;
-			}
+		foreach (EnemyScript es in netDog.spookyScarySkellingtons) {
+			yield return es.transform;
 		}
 	}
 
@@ -102,7 +100,7 @@ public class EnemyScript : NetworkBehaviour {
 		atkcd -= Time.deltaTime;
 	}
 
-	void OnCollisionEnter2D (Collision2D coll) {
+	void OnCollisionStay2D (Collision2D coll) {
 		ServerCollision2D(coll);
 	}
 
@@ -122,10 +120,15 @@ public class EnemyScript : NetworkBehaviour {
 			var es = c.GetComponent<EnemyScript>();
 			var ps = c.GetComponent<PlayerScript>();
 
+			float force = 0;
+
 			if (es != null) {
 				es.TakeDamage(damage);
+				force = 3f;
 			} else if (ps != null && !ps.ouchGoing && !ps.stealthed) {
 				ps.Rpc_TakeDamage(damage);
+				force = 15f;
+
 			} else {
 				return;
 			}
@@ -133,7 +136,7 @@ public class EnemyScript : NetworkBehaviour {
 			Rigidbody2D rb2 = c.GetComponent<Rigidbody2D>();
 			if (rb2 != null) {
 				var dir = (c.transform.position - transform.position).normalized;
-				rb2.AddForce(dir * 15, ForceMode2D.Impulse);
+				rb2.AddForce(dir * force, ForceMode2D.Impulse);
 			}
 
 			atkcd = attackCooldown;

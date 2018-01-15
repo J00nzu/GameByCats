@@ -207,6 +207,7 @@ public class ArcheryScript : ClassScript {
 
 		Cmd_MakeSkellington(transform.position + transform.right * 2, transform.rotation);
 
+		Rpc_ToggleStealth(false);
 
 		NetworkServer.Destroy(SummoningEffect);
 		yield return null;

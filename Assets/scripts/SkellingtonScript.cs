@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SkellingtonScript : EnemyScript{
+
+	new int damage = 5;
     
     override protected IEnumerable<Transform> GetTargets()
     {
