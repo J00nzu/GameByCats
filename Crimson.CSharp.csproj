@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.2.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -232,20 +234,23 @@
     <Compile Include="Assets\scripts\classes\archer\PiercingArrowScript.cs" />
     <Compile Include="Assets\scripts\classes\archer\RicochetingArrowScript.cs" />
     <Compile Include="Assets\scripts\classes\ClassScript.cs" />
-    <Compile Include="Assets\scripts\classes\necromancer\NecromancerScript.cs" />
+    <Compile Include="Assets\scripts\classes\warrior\necromancer\NecromancerScript.cs" />
     <Compile Include="Assets\scripts\classes\warrior\SwordScript.cs" />
     <Compile Include="Assets\scripts\classes\warrior\WarriorScript.cs" />
     <Compile Include="Assets\scripts\ControlScript.cs" />
     <Compile Include="Assets\scripts\DividingEnemyScript.cs" />
     <Compile Include="Assets\scripts\Dog.cs" />
     <Compile Include="Assets\scripts\EnemyScript.cs" />
-    <Compile Include="Assets\scripts\EnemySpawn.cs" />
     <Compile Include="Assets\scripts\HiveScript.cs" />
     <Compile Include="Assets\scripts\NetDog.cs" />
     <Compile Include="Assets\scripts\NetGuard.cs" />
     <Compile Include="Assets\scripts\NuNetworkManager.cs" />
     <Compile Include="Assets\scripts\PlayerScript.cs" />
+    <Compile Include="Assets\scripts\SkellingtonScript.cs" />
+    <Compile Include="Assets\scripts\StayOnTop.cs" />
+    <Compile Include="Assets\scripts\StayOnTopOf.cs" />
     <Compile Include="Assets\scripts\WaveSpawnerScript.cs" />
+    <Compile Include="Assets\scripts\WaveTextScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\OpenSans\License!.txt" />

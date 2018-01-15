@@ -15,10 +15,11 @@ public class NuNetworkManager : NetworkManager {
 
 	// Use this for initialization
 	void Start () {
+		/*
 		archerButton.onClick.AddListener(delegate { playerClassPicker(archerButton.name); });
 		warriorButton.onClick.AddListener(delegate { playerClassPicker(warriorButton.name); });
         nekoromancerButton.onClick.AddListener(delegate { playerClassPicker(nekoromancerButton.name); });
-
+		*/
     }
 
 	// Update is called once per frame

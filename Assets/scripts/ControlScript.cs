@@ -21,14 +21,16 @@ public class ControlScript : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isLocalPlayer) {
+		if (!isLocalPlayer || player.ouchGoing) {
 			return;
 		}
         
         Vector2 moveDir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
-		rb.velocity = moveDir*5;
+		var targetVel = moveDir*5;
+		rb.velocity = Vector3.Lerp(rb.velocity, targetVel, 4 * Time.deltaTime);
 
-        Vector2 mouseScreenPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+		Vector2 mouseScreenPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.right = mouseScreenPosition - (Vector2) transform.position;        
 
 		

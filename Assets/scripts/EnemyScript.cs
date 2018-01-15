@@ -25,23 +25,27 @@ public class EnemyScript : NetworkBehaviour {
 
 	public float tenacity = 1f;
 
+	[SyncVar]
 	float stunTimer = 0;
+
+	protected float damage = 5;
+
+	float attackCooldown = 2f;
+	float atkcd = 0f;
+
+	public GameObject attackEffectPrefab;
 
 	// Use this for initialization
 	protected void Start () {
 		netDog = FindObjectOfType<NetDog>();
         rb = GetComponent<Rigidbody2D>();
         netDog.AddEnemy(this);
-        if (Network.isClient) {
-		}
         max_hp = hp;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (Network.isServer) {
-			ServerUpdate();
-		}
+		ServerUpdate();
 		LocalUpdate();
 	}
 
@@ -49,6 +53,11 @@ public class EnemyScript : NetworkBehaviour {
 		foreach (PlayerScript ps in netDog.players) {
 			if(!ps.stealthed)
 				yield return ps.transform;
+		}
+		foreach (EnemyScript es in netDog.enemies) {
+			if (es.tag == "Skellington") {
+				yield return es.transform;
+			}
 		}
 	}
 
@@ -84,8 +93,44 @@ public class EnemyScript : NetworkBehaviour {
         }
     }
 
+	[Server]
 	void ServerUpdate () {
+		if (dead) return;
 
+		atkcd -= Time.deltaTime;
+		if (atkcd > 0)
+			return;
+
+		var list = Physics2D.OverlapCircleAll(transform.position, 1.5f);
+		foreach (var c in list) {
+
+			List<Transform> l = new List<Transform>();
+			l.AddRange(GetTargets());
+			if (l.Contains(c.transform)) {
+
+				Rpc_AttackAnim(c.transform.position);
+				var es = c.GetComponent<EnemyScript>();
+				var ps = c.GetComponent<PlayerScript>();
+
+				if (es != null) {
+					es.TakeDamage(damage);
+				}
+				else if (ps != null && !ps.ouchGoing && !ps.stealthed) {
+					ps.Rpc_TakeDamage(damage);
+				} else {
+					continue;
+				}
+
+				Rigidbody2D rb2 = c.GetComponent<Rigidbody2D>();
+				if (rb2 != null) {
+					var dir = (c.transform.position - transform.position).normalized;
+					rb2.AddForce(dir * 15, ForceMode2D.Impulse);
+				}
+
+				atkcd = attackCooldown;
+				break;
+			}
+		}
 	}
 
     [Server]
@@ -108,17 +153,27 @@ public class EnemyScript : NetworkBehaviour {
 
             bloodSplatter.transform.localScale = transform.localScale;
 
-            netDog.RemoveEnemy(this);
+			Rpc_RemoveFromList();
 
-            NetworkServer.Spawn(bloodSplatter);
+			NetworkServer.Spawn(bloodSplatter);
             StartCoroutine(Die());
         }
     }
-    [Server]
+
+	[ClientRpc]
+	protected void Rpc_RemoveFromList () {
+		netDog.RemoveEnemy(this);
+	}
+	[Server]
     protected virtual IEnumerator Die()
     {
         yield return new WaitForSeconds(5f);
 
         NetworkServer.Destroy(gameObject);
     }
+
+	[ClientRpc]
+	void Rpc_AttackAnim (Vector3 TargetPosition) {
+		Vector3 dirVec = (TargetPosition - transform.position).normalized;
+	}
 }

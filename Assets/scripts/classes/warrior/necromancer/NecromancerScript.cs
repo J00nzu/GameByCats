@@ -23,7 +23,8 @@ public class NecromancerScript : ClassScript
     IEnumerator SummonTimer()
     {
         SummoningEffect = Instantiate(summoningEffectPrefab, new Vector3(transform.position.x, transform.position.y, -9f) , Quaternion.identity) as GameObject;
-        SummoningEffect.GetComponent<StayOnTopOf>().target = transform;
+        SummoningEffect.GetComponent<StayOnTopOf>().targetName = transform.name;
+
         float holdTimer = 0;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         while (holdTimer < 2.5f)

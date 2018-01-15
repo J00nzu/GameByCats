@@ -6,6 +6,11 @@ using UnityEngine.Networking;
 
 public class ArcheryScript : ClassScript {
 
+	public GameObject SkellingtonPrefab;
+
+	public GameObject summoningEffectPrefab;
+	GameObject SummoningEffect;
+
 	public GameObject ArrowPrefab;
 	public GameObject PiercingArrowPrefab;
 	public GameObject RicochetingArrowPrefab;
@@ -42,16 +47,22 @@ public class ArcheryScript : ClassScript {
 		}
 
 
-		if (Input.GetKey(KeyCode.Alpha1)) {
+		if (Input.GetKeyDown(KeyCode.Alpha1)) {
+
 			mode = SpecialMode.Piercing;
-		} else if (Input.GetKey(KeyCode.Alpha2)) {
+
+		} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+
 			mode = SpecialMode.Ricochet;
+
+		} else if (Input.GetKeyDown(KeyCode.Q)) {
+
+			Rpc_ToggleStealth(!player.stealthed);
+
+		} else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+			StartCoroutine(SummonTimer());
 		}
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Rpc_ToggleStealth(!player.stealthed);
-        }
 	}
 
    [ClientRpc]
@@ -69,7 +80,7 @@ public class ArcheryScript : ClassScript {
         sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, val?0.2f:1f);
 
     }
-
+	[Client]
     IEnumerator ShotTimer () {
 		float damageMultiplier = 1f;
 		float speedMultiplier = 1f;
@@ -108,6 +119,7 @@ public class ArcheryScript : ClassScript {
 			Cmd_BaseAttack(transform.position, transform.right, damageMultiplier, speedMultiplier);
 		}
 		timeSinceLastShot = 0f;
+		Rpc_ToggleStealth(false);
 	}
 
 	[Command]
@@ -171,5 +183,44 @@ public class ArcheryScript : ClassScript {
 		bscript.damage *= damageMultiplier;
 
 		NetworkServer.Spawn(Arrow);
+	}
+
+
+
+	IEnumerator SummonTimer () {
+		SummoningEffect = Instantiate(summoningEffectPrefab, new Vector3(transform.position.x, transform.position.y, -9f), Quaternion.identity) as GameObject;
+		SummoningEffect.GetComponent<StayOnTopOf>().targetName = transform.name;
+
+		NetworkServer.Spawn(SummoningEffect);
+
+		float holdTimer = 0;
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+		while (holdTimer < 2.5f) {
+			if (!Input.GetKey(KeyCode.Alpha3)) {
+				NetworkServer.Destroy(SummoningEffect);
+				yield break;
+			}
+			holdTimer += Time.deltaTime;
+			rb.velocity = new Vector2(0, 0);
+			yield return null;
+		}
+
+		Cmd_MakeSkellington(transform.position + transform.right * 2, transform.rotation);
+
+
+		NetworkServer.Destroy(SummoningEffect);
+		yield return null;
+	}
+
+	[Command]
+	void Cmd_MakeSkellington (Vector3 position, Quaternion rotation) {
+		GameObject skellington = Instantiate(SkellingtonPrefab, position, rotation) as GameObject;
+		Rpc_Poof(skellington.transform.position);
+		NetworkServer.Spawn(skellington);
+	}
+
+	[ClientRpc]
+	void Rpc_Poof (Vector3 position) {
+		Instantiate(SmokePoofPrefab, position, Quaternion.identity);
 	}
 }
