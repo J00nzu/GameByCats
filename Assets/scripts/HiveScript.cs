@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class HiveScript : NetworkBehaviour {
 
+	WaveSpawnerScript wps;
+	NetDog dog;
     public GameObject enemyPrefab;
     bool dead;
     [SyncVar]
@@ -12,6 +14,8 @@ public class HiveScript : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		wps = FindObjectOfType<WaveSpawnerScript>();
+		dog = FindObjectOfType<NetDog>();
         StartCoroutine(SpawnEnemy());
 	}
 	
@@ -33,7 +37,9 @@ public class HiveScript : NetworkBehaviour {
 
     IEnumerator SpawnEnemy()
     {
-        while (!dead)
+		yield return new WaitForSeconds(5f);
+
+		while (!dead)
         {
             var position = Random.insideUnitCircle * 2;
             var enemy = (GameObject)Instantiate(
@@ -41,7 +47,10 @@ public class HiveScript : NetworkBehaviour {
             position + (Vector2) transform.position,
             Quaternion.identity);
             NetworkServer.Spawn(enemy);
-            yield return new WaitForSeconds(5f);
-        }
+            yield return new WaitForSeconds(15f);
+			while (dog.enemies.Count > wps.maxConcurrentEnemies) {
+				yield return null;
+			}
+		}
     }
 }
