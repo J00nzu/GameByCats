@@ -146,11 +146,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodSplatterPrefab: {fileID: 1609768827244226, guid: ec14bb0ee53939b4386a46fe1b00102f,
     type: 2}
+  XpBlobPrefab: {fileID: 1793998286532906, guid: 98c4ec6978506ac488aa14e7c33706f6,
+    type: 2}
   moveSpeed: 4
   acceleration: 6
   hp: 40
   max_hp: 0
   tenacity: 1
+  attackEffectPrefab: {fileID: 0}
 --- !u!212 &212572873578702488
 SpriteRenderer:
   m_ObjectHideFlags: 1

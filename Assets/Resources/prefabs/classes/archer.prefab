@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114901331184818586}
   m_Layer: 10
   m_Name: archer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4eba7d232069074a993198447be5275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SkellingtonPrefab: {fileID: 0}
+  summoningEffectPrefab: {fileID: 0}
   ArrowPrefab: {fileID: 1140878602364582, guid: 26429e87de7520f458d327c793a6b04a,
     type: 2}
   PiercingArrowPrefab: {fileID: 1140878602364582, guid: 5fb548d75b33bc444b35803422594932,
@@ -146,10 +148,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e156667fff54e6a41833cbe258e7bf58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  level: 0
+  exp: 0
+  expneeded: 4
   playerName: 
   stealthed: 0
   playerLightPrefab: {fileID: 1539921165623528, guid: ee5766cb8bb72654c82d77b577d130f5,
     type: 2}
+  ouchGoing: 0
 --- !u!114 &114782003299334860
 MonoBehaviour:
   m_ObjectHideFlags: 1

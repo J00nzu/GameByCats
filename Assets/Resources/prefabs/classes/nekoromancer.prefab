@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114915448902189958}
   m_Layer: 10
   m_Name: nekoromancer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,10 +124,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e156667fff54e6a41833cbe258e7bf58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  level: 0
+  exp: 0
+  expneeded: 4
   playerName: 
   stealthed: 0
   playerLightPrefab: {fileID: 1539921165623528, guid: ee5766cb8bb72654c82d77b577d130f5,
     type: 2}
+  ouchGoing: 0
 --- !u!114 &114782003299334860
 MonoBehaviour:
   m_ObjectHideFlags: 1
