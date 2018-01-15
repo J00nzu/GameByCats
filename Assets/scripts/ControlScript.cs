@@ -27,7 +27,7 @@ public class ControlScript : NetworkBehaviour {
         
         Vector2 moveDir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
 		var targetVel = moveDir*5;
-		rb.velocity = Vector3.Lerp(rb.velocity, targetVel, 4 * Time.deltaTime);
+        rb.velocity = targetVel;
 
 
 		Vector2 mouseScreenPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -15,7 +15,7 @@ public class PlayerScript : NetworkBehaviour {
 	[SyncVar]
 	public int exp;
 	[SyncVar]
-	public int expneeded;
+	public int expneeded = 4;
 
 	public string playerName;
 
@@ -55,6 +55,27 @@ public class PlayerScript : NetworkBehaviour {
 		}
 		if(!ouchGoing)StartCoroutine(ouch());
 	}
+
+    public void GetXp(int xp)
+    {
+        if (GetComponent<NetworkIdentity>().isLocalPlayer)
+        {
+            if(exp + xp >= expneeded)
+            {
+                level++;
+                xp = exp + xp - expneeded;
+                exp = 0;
+                exp += xp;
+                expneeded *= 2;
+                maxHealth += 10;
+                health = maxHealth;
+            }
+            else
+            {
+                exp += xp;
+            }
+        }
+    }
 
 	public bool ouchGoing = false;
 
