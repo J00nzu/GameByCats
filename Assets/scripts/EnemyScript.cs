@@ -11,6 +11,8 @@ public class EnemyScript : NetworkBehaviour {
     Rigidbody2D rb;
     public GameObject bloodSplatterPrefab;
 
+    public GameObject XpBlobPrefab;
+
 	[SyncVar]
 	public float moveSpeed = 4;
 	[SyncVar]
@@ -147,6 +149,7 @@ public class EnemyScript : NetworkBehaviour {
 
         if(hp < 0 && !dead)
         {
+            Rpc_RewardXp();
             dead = true;
             rb.drag = 25;
             rb.angularDrag = 50;
@@ -162,6 +165,16 @@ public class EnemyScript : NetworkBehaviour {
 
 			NetworkServer.Spawn(bloodSplatter);
             StartCoroutine(Die());
+        }
+    }
+
+    [ClientRpc]
+    void Rpc_RewardXp()
+    {
+        if (gameObject.tag != "Skellington")
+        {
+            Instantiate(XpBlobPrefab, transform.position, Quaternion.identity);
+            netDog.localPlayer.GetComponent<PlayerScript>().GetXp(1);
         }
     }
 
