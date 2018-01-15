@@ -32,7 +32,7 @@ public class RicochetingArrowScript : PiercingArrowScript {
                 return;
             }
 
-            if (collider.transform.tag == "Enemy")
+            if (collider.transform.tag == "Enemy" || collider.transform.tag == "Hive")
             {
                 float nearestDistance = float.MaxValue;
                 float distance;
@@ -44,11 +44,17 @@ public class RicochetingArrowScript : PiercingArrowScript {
 					if (es != null /*&& Network.isServer*/) {
 						es.TakeDamage(damage);
 					}
-					damage *= 0.75f;
                 }
+				else if (collider.gameObject.GetComponent<HiveScript>() != null) {
+					var hs = collider.gameObject.GetComponent<HiveScript>();
+					if (hs != null /*&& Network.isServer*/) {
+						hs.TakeDamage(damage);
+					}
+				}
+				damage *= 0.75f;
 
 
-                Rigidbody2D rb2 = collider.GetComponent<Rigidbody2D>();
+				Rigidbody2D rb2 = collider.GetComponent<Rigidbody2D>();
                 if (rb2 != null)
                 {
                     var trb = GetComponent<Rigidbody2D>();
@@ -67,7 +73,7 @@ public class RicochetingArrowScript : PiercingArrowScript {
 				Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 50f);
                 foreach (Collider2D enemyCol in hitColliders)
                 {
-                    if (enemyCol.transform.tag == "Enemy" && !hitList.Contains(enemyCol.gameObject))
+                    if ((enemyCol.transform.tag == "Enemy" || enemyCol.transform.tag == "Hive") && !hitList.Contains(enemyCol.gameObject))
                     {
                         distance = Vector2.Distance(transform.position, enemyCol.transform.position);
                         if (distance < nearestDistance)

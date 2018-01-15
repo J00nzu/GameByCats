@@ -98,38 +98,43 @@ public class EnemyScript : NetworkBehaviour {
 		if (dead) return;
 
 		atkcd -= Time.deltaTime;
+	}
+
+	void OnCollisionEnter2D (Collision2D coll) {
+		ServerCollision2D(coll);
+	}
+
+	[Server]
+	void ServerCollision2D(Collision2D coll) {
+
 		if (atkcd > 0)
 			return;
 
-		var list = Physics2D.OverlapCircleAll(transform.position, 1.5f);
-		foreach (var c in list) {
+		Collider2D c = coll.collider;
 
-			List<Transform> l = new List<Transform>();
-			l.AddRange(GetTargets());
-			if (l.Contains(c.transform)) {
+		List<Transform> l = new List<Transform>();
+		l.AddRange(GetTargets());
+		if (l.Contains(c.transform)) {
 
-				Rpc_AttackAnim(c.transform.position);
-				var es = c.GetComponent<EnemyScript>();
-				var ps = c.GetComponent<PlayerScript>();
+			Rpc_AttackAnim(c.transform.position);
+			var es = c.GetComponent<EnemyScript>();
+			var ps = c.GetComponent<PlayerScript>();
 
-				if (es != null) {
-					es.TakeDamage(damage);
-				}
-				else if (ps != null && !ps.ouchGoing && !ps.stealthed) {
-					ps.Rpc_TakeDamage(damage);
-				} else {
-					continue;
-				}
-
-				Rigidbody2D rb2 = c.GetComponent<Rigidbody2D>();
-				if (rb2 != null) {
-					var dir = (c.transform.position - transform.position).normalized;
-					rb2.AddForce(dir * 15, ForceMode2D.Impulse);
-				}
-
-				atkcd = attackCooldown;
-				break;
+			if (es != null) {
+				es.TakeDamage(damage);
+			} else if (ps != null && !ps.ouchGoing && !ps.stealthed) {
+				ps.Rpc_TakeDamage(damage);
+			} else {
+				return;
 			}
+
+			Rigidbody2D rb2 = c.GetComponent<Rigidbody2D>();
+			if (rb2 != null) {
+				var dir = (c.transform.position - transform.position).normalized;
+				rb2.AddForce(dir * 15, ForceMode2D.Impulse);
+			}
+
+			atkcd = attackCooldown;
 		}
 	}
 
@@ -174,6 +179,19 @@ public class EnemyScript : NetworkBehaviour {
 
 	[ClientRpc]
 	void Rpc_AttackAnim (Vector3 TargetPosition) {
+
+		return; // Unimplemented
+
+		if (attackEffectPrefab == null) {
+			Debug.Log("Attack effect prefab missing!");
+			return;
+		}
 		Vector3 dirVec = (TargetPosition - transform.position).normalized;
+		var effect = Instantiate(attackEffectPrefab, transform.position, Quaternion.identity, transform);
+
+		effect.transform.localPosition = new Vector3(0, 0, -2);
+		effect.transform.right = dirVec;
+
+		Destroy(effect, 2);
 	}
 }

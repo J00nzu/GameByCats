@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4780741164874750}
   - component: {fileID: 108397479341425996}
-  - component: {fileID: 114566148618459220}
+  - component: {fileID: 114510048427108356}
   m_Layer: 0
   m_Name: Player light
   m_TagString: Untagged
@@ -77,7 +77,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114566148618459220
+--- !u!114 &114510048427108356
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1539921165623528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6d2452bd138034191b0adbdd50f867, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b842f3e419e395458aab53853f41d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}

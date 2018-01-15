@@ -25,7 +25,7 @@ public class PiercingArrowScript : ArrowScript {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collided && collision.transform.tag != "Arrow" && collision.transform.name != player)
+        if (!collided && collision.transform.tag != "Arrow" && collision.transform.name != player && !collision.isTrigger)
         {
             if (!hitList.Contains(collision.gameObject))
             {
@@ -43,9 +43,14 @@ public class PiercingArrowScript : ArrowScript {
 					es.TakeDamage(damage);
 				}
 
+			} else if (collision.transform.tag == "Hive") {
+				var hs = collision.gameObject.GetComponent<HiveScript>();
+				if (hs != null) {
+					hs.TakeDamage(damage);
+				}
 			}
 
-            Rigidbody2D rb2 = collision.GetComponent<Rigidbody2D>();
+			Rigidbody2D rb2 = collision.GetComponent<Rigidbody2D>();
             if (rb2 != null) {
                 var trb = GetComponent<Rigidbody2D>();
                 rb2.AddForce(trb.velocity * trb.mass, ForceMode2D.Impulse);

@@ -151,6 +151,8 @@ MonoBehaviour:
   hp: 40
   max_hp: 0
   tenacity: 1
+  attackEffectPrefab: {fileID: 1203025920445628, guid: 8c60ff4a02515ac469111766e8627507,
+    type: 2}
 --- !u!212 &212572873578702488
 SpriteRenderer:
   m_ObjectHideFlags: 1
